@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    Your Gold: {{request.session.ninja}}
+    
+    <ul>
+    <li><form action="/process" method="post"> {% csrf_token %}
+        <h1>Farm</h1>
+        <h3>Earns 10-20 Gold</h3>
+        <input type="hidden" name="farm">
+        <input type="submit" name="farm">
+    </form>
+    </li>
+    <li><form action="/process" method="post">{% csrf_token %}
+        <h1>Cave</h1>
+        <h3>Earns 5-10 Gold</h3>
+        <input type="hidden" name="cave">
+        <input type="submit" name="cave">
+        </form>
+    </li>
+    <li><form action="/process" method="post">{% csrf_token %}
+        <h1>House</h1>
+        <h3>Earns 2-5 Gold</h3>
+        <input type="hidden" name="house">
+        <input type="submit" name="house">
+    </form>
+    </li>
+    <li><form action="/process" method="post">{% csrf_token %}
+        <h1>Casino</h1>
+        <h3>Earns/Takes 0-50 Gold</h3>
+        <input type="hidden" name="casino">
+        <input type="submit" name="casino">
+    </form>
+    </li>
+    </ul>
+    <h4>Activities:</h4>
+    <div>
+        {% for log in request.session.logs reversed %}
+            <p class='{{ log.class }}'>{{ log.message }}</p>
+        {% endfor %}
+    <style>
+        ul{
+            text-align:center;
+        }
+    li{
+        display:inline-flex;
+        border:4px solid;
+        width:20%;
+        text-align:center;
+        .earned {
+    color: green;
+}
+.lost {
+    color: red;
+}
+
+    }
+    </style>
+    
+</body>
+</html>
